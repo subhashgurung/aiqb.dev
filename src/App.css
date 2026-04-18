@@ -1,0 +1,81 @@
+/* App-specific styles */
+
+/* Smooth scroll behavior for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure pinned sections stack correctly */
+.section-pinned {
+  will-change: transform;
+}
+
+/* Video element optimization */
+video {
+  will-change: transform, opacity;
+}
+
+/* Glass card hover effects */
+.glass-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
+}
+
+/* Form select styling */
+select option {
+  background-color: #002233;
+  color: white;
+}
+
+/* Responsive typography adjustments */
+@media (max-width: 640px) {
+  .font-display {
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .section-pinned {
+    will-change: auto;
+  }
+}
+
+/* Focus visible styles for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #00D4FF;
+  outline-offset: 2px;
+}
+
+/* Loading state for images */
+img {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Custom cursor for interactive elements */
+button,
+a,
+[role="button"] {
+  cursor: pointer;
+}
+
+/* Prevent text selection on UI elements */
+nav,
+button {
+  user-select: none;
+}
