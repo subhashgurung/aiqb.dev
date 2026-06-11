@@ -14,8 +14,8 @@ export function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    company: "",
-    budget: "",
+    business: "",
+    interest: "",
     message: "",
   });
 
@@ -24,7 +24,6 @@ export function ContactSection() {
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      // Left column animation
       gsap.fromTo(
         leftColRef.current,
         { opacity: 0, x: "-6vw" },
@@ -42,7 +41,6 @@ export function ContactSection() {
         }
       );
 
-      // Form card animation
       gsap.fromTo(
         formCardRef.current,
         { opacity: 0, x: "6vw", y: 40, rotateX: 8 },
@@ -62,7 +60,6 @@ export function ContactSection() {
         }
       );
 
-      // Form fields stagger
       const fields = formCardRef.current?.querySelectorAll(".form-field");
       fields?.forEach((field, i) => {
         gsap.fromTo(
@@ -89,12 +86,14 @@ export function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    alert("Thank you! We'll be in touch within 24 hours.");
+    // TODO: wire to backend / form service
+    alert("Dhanyabad! We'll reply within one business day.");
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -103,19 +102,20 @@ export function ContactSection() {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative z-[15] bg-background py-20 lg:py-32"
+      className="relative z-[16] bg-background py-20 lg:py-32"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
           {/* Left Column */}
           <div ref={leftColRef} className="lg:w-[45%] lg:pr-8">
             <h2 className="text-4xl lg:text-5xl text-white font-display leading-tight mb-6">
-              Let's build your first agent.
+              Let's grow something together.
             </h2>
 
             <p className="text-base text-white/70 font-body leading-relaxed mb-10">
-              Tell us what you're automating. We'll reply within one business day
-              with next steps.
+              Restaurant looking for a steady microgreens supply? Farmer
+              curious about sensors? Tell us what you need — we reply within
+              one business day.
             </p>
 
             {/* Contact Details */}
@@ -128,7 +128,7 @@ export function ContactSection() {
               <div className="flex items-center gap-4">
                 <MapPin className="w-5 h-5 text-accent" strokeWidth={1.5} />
                 <span className="text-white/70 font-body">
-                  Remote (UTC−5 to UTC+2)
+                  Pharping, Kathmandu Valley · Nepal
                 </span>
               </div>
 
@@ -162,58 +162,53 @@ export function ContactSection() {
 
                 <div className="form-field">
                   <label className="block text-xs text-white/60 font-body mb-2 uppercase tracking-wider">
-                    Email
+                    Email or phone
                   </label>
                   <input
-                    type="email"
+                    type="text"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     required
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white font-body text-sm focus:border-accent/50 focus:outline-none transition-colors"
-                    placeholder="you@company.com"
+                    placeholder="you@restaurant.com or 98XXXXXXXX"
                   />
                 </div>
 
                 <div className="form-field">
                   <label className="block text-xs text-white/60 font-body mb-2 uppercase tracking-wider">
-                    Company
+                    Business (optional)
                   </label>
                   <input
                     type="text"
-                    name="company"
-                    value={formData.company}
+                    name="business"
+                    value={formData.business}
                     onChange={handleChange}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white font-body text-sm focus:border-accent/50 focus:outline-none transition-colors"
-                    placeholder="Company name"
+                    placeholder="Restaurant, hotel, or farm name"
                   />
                 </div>
 
                 <div className="form-field">
                   <label className="block text-xs text-white/60 font-body mb-2 uppercase tracking-wider">
-                    Budget Range
+                    I'm interested in
                   </label>
                   <select
-                    name="budget"
-                    value={formData.budget}
+                    name="interest"
+                    value={formData.interest}
                     onChange={handleChange}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white font-body text-sm focus:border-accent/50 focus:outline-none transition-colors appearance-none cursor-pointer"
                   >
-                    <option value="" className="bg-background">
-                      Select budget range
+                    <option value="">Select one</option>
+                    <option value="weekly-supply">
+                      Weekly microgreens supply (restaurant/hotel)
                     </option>
-                    <option value="10k-25k" className="bg-background">
-                      $10k - $25k
+                    <option value="home-delivery">Home delivery</option>
+                    <option value="esp32-kit">ESP32 farm kit</option>
+                    <option value="consulting">
+                      Smart farm setup / consulting
                     </option>
-                    <option value="25k-50k" className="bg-background">
-                      $25k - $50k
-                    </option>
-                    <option value="50k-100k" className="bg-background">
-                      $50k - $100k
-                    </option>
-                    <option value="100k+" className="bg-background">
-                      $100k+
-                    </option>
+                    <option value="other">Something else</option>
                   </select>
                 </div>
 
@@ -227,7 +222,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     rows={4}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white font-body text-sm focus:border-accent/50 focus:outline-none transition-colors resize-none"
-                    placeholder="Tell us about your project..."
+                    placeholder="Tell us what you're looking for..."
                   />
                 </div>
 

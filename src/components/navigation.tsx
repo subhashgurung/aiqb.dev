@@ -4,10 +4,10 @@ import { GlassButton } from "./ui/glass-button";
 
 const navLinks = [
   { label: "Home", href: "#home", active: true },
-  { label: "Studio", href: "#studio" },
-  { label: "About", href: "#about" },
-  { label: "Journal", href: "#journal" },
-  { label: "Reach Us", href: "#contact" },
+  { label: "Farm", href: "#farm" },
+  { label: "Shop", href: "#shop" },
+  { label: "Tech", href: "#tech" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function Navigation() {
@@ -26,16 +26,20 @@ export function Navigation() {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        scrolled ? "bg-background/80 backdrop-blur-md border-b border-border/50" : "bg-transparent"
+        scrolled
+          ? "bg-background/80 backdrop-blur-md border-b border-border/50"
+          : "bg-transparent"
       )}
     >
-      <div className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
+      <div className="flex items-center justify-between px-6 sm:px-8 py-5 max-w-7xl mx-auto">
         {/* Logo */}
-        <a
-          href="#home"
-          className="text-3xl tracking-tight text-white font-display"
-        >
-          AIQB<span className="text-accent">.DEV</span>
+        <a href="#home" className="flex flex-col leading-none">
+          <span className="text-2xl sm:text-3xl tracking-tight text-white font-display">
+            AI<span className="text-accent"> KHETI</span>
+          </span>
+          <span className="text-mono text-[9px] tracking-[0.3em] text-white/40 uppercase mt-1">
+            by AIQB.dev
+          </span>
         </a>
 
         {/* Nav Links - Desktop */}
@@ -46,9 +50,7 @@ export function Navigation() {
               href={link.href}
               className={cn(
                 "text-sm font-body transition-colors duration-300",
-                link.active
-                  ? "text-white"
-                  : "text-white/60 hover:text-white"
+                link.active ? "text-white" : "text-white/60 hover:text-white"
               )}
             >
               {link.label}
@@ -57,7 +59,7 @@ export function Navigation() {
         </div>
 
         {/* CTA Button */}
-        <GlassButton variant="default">Let's Talk</GlassButton>
+        <GlassButton variant="default">Order greens</GlassButton>
       </div>
     </nav>
   );

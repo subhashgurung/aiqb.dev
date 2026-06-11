@@ -2,13 +2,14 @@ import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GlassCard } from "@/components/ui/glass-card";
+import { SensorTicker } from "@/components/sensor-ticker";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const metrics = [
-  { value: "80%", label: "Average time saved on repeat workflows" },
-  { value: "3x", label: "Faster execution across ops, support, and content" },
-  { value: "24h", label: "Typical first prototype delivery" },
+  { value: "7–14", label: "Days from seed to harvest, tray by tray" },
+  { value: "1,440", label: "Sensor readings logged every single day" },
+  { value: "24h", label: "From Pharping soil to a Kathmandu kitchen" },
 ];
 
 export function ProofSection() {
@@ -16,7 +17,7 @@ export function ProofSection() {
   const metricsRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const quoteRef = useRef<HTMLParagraphElement>(null);
-  const avatarRef = useRef<HTMLDivElement>(null);
+  const tickerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -41,8 +42,8 @@ export function ProofSection() {
         0
       );
 
-      // Metric values count-up effect (scrubbed)
-      const metricValues = metricsRef.current?.querySelectorAll(".metric-value");
+      const metricValues =
+        metricsRef.current?.querySelectorAll(".metric-value");
       metricValues?.forEach((el, i) => {
         scrollTl.fromTo(
           el,
@@ -67,13 +68,11 @@ export function ProofSection() {
       );
 
       scrollTl.fromTo(
-        avatarRef.current,
-        { scale: 0.85, opacity: 0 },
-        { scale: 1, opacity: 1, ease: "none" },
+        tickerRef.current,
+        { opacity: 0 },
+        { opacity: 1, ease: "none" },
         0.2
       );
-
-      // SETTLE (30% - 70%) - hold
 
       // EXIT (70% - 100%)
       scrollTl.fromTo(
@@ -114,36 +113,36 @@ export function ProofSection() {
           ))}
         </div>
 
-        {/* Testimonial Card */}
+        {/* Farm Status Card */}
         <GlassCard
           ref={cardRef}
-          className="w-full max-w-[520px] h-[420px] lg:h-[480px] flex flex-col justify-end p-8 relative"
+          className="w-full max-w-[520px] h-[420px] lg:h-[480px] flex flex-col justify-between p-8 relative overflow-hidden"
         >
-          {/* Quote */}
-          <p
-            ref={quoteRef}
-            className="text-xl lg:text-2xl text-white font-display leading-snug mb-8"
-          >
-            "AIQB turned our messiest process into a calm, repeatable system."
-          </p>
+          {/* Background image */}
+          <img
+            src="/proof-bg.jpg"
+            alt="Microgreen trays at different growth stages"
+            className="absolute inset-0 w-full h-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
 
-          {/* Attribution */}
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-white font-body font-medium">Jordan Lee</p>
-              <p className="text-white/60 text-sm font-body">COO</p>
-            </div>
+          <div className="relative z-10">
+            <p className="text-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">
+              Farm status
+            </p>
+          </div>
 
-            {/* Avatar */}
-            <div
-              ref={avatarRef}
-              className="w-14 h-14 rounded-full overflow-hidden border border-white/20"
+          <div className="relative z-10">
+            <p
+              ref={quoteRef}
+              className="text-xl lg:text-2xl text-white font-display leading-snug mb-8"
             >
-              <img
-                src="/testimonial-avatar.jpg"
-                alt="Jordan Lee"
-                className="w-full h-full object-cover"
-              />
+              Every tray on this farm reports its own health. Nothing is
+              guessed. Nothing is wasted.
+            </p>
+
+            <div ref={tickerRef}>
+              <SensorTicker />
             </div>
           </div>
         </GlassCard>

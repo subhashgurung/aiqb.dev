@@ -1,13 +1,14 @@
 import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SensorTicker } from "@/components/sensor-ticker";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const footerLinks = [
-  { label: "Services", href: "#about" },
-  { label: "Process", href: "#studio" },
-  { label: "About", href: "#about" },
+  { label: "Farm", href: "#farm" },
+  { label: "Shop", href: "#shop" },
+  { label: "Tech", href: "#tech" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -44,7 +45,7 @@ export function FooterSection() {
   return (
     <footer
       ref={footerRef}
-      className="relative z-[16] bg-background-secondary py-16 lg:py-24"
+      className="relative z-[17] bg-background-secondary py-16 lg:py-24"
     >
       <div
         ref={contentRef}
@@ -53,14 +54,18 @@ export function FooterSection() {
         {/* Logo */}
         <a
           href="#home"
-          className="text-4xl tracking-tight text-white font-display mb-4"
+          className="text-4xl tracking-tight text-white font-display mb-2"
         >
-          AIQB<sup className="text-xs">®</sup>
+          AI<span className="text-accent"> KHETI</span>
         </a>
+
+        <p className="text-mono text-[10px] tracking-[0.3em] text-white/40 uppercase mb-6">
+          by AIQB.dev
+        </p>
 
         {/* Tagline */}
         <p className="text-lg text-white/60 font-display mb-8">
-          Automate what slows you down.
+          Soil, sunrise, and sensors.
         </p>
 
         {/* Links */}
@@ -76,12 +81,17 @@ export function FooterSection() {
           ))}
         </div>
 
+        {/* Live ticker */}
+        <div className="mb-10">
+          <SensorTicker />
+        </div>
+
         {/* Divider */}
         <div className="w-16 h-px bg-white/10 mb-8" />
 
         {/* Legal */}
         <p className="text-xs text-white/30 font-body">
-          © 2026 AIQB. All rights reserved.
+          © 2026 AI Kheti · Pharping, Nepal · All rights reserved.
         </p>
       </div>
     </footer>

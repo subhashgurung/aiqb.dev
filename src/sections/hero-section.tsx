@@ -2,6 +2,7 @@ import { useEffect, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GlassButton } from "@/components/ui/glass-button";
+import { SensorTicker } from "@/components/sensor-ticker";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,7 +13,7 @@ export function HeroSection() {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const scrollHintRef = useRef<HTMLParagraphElement>(null);
+  const tickerRef = useRef<HTMLDivElement>(null);
 
   // Load animation
   useEffect(() => {
@@ -43,9 +44,9 @@ export function HeroSection() {
           "-=0.3"
         )
         .fromTo(
-          scrollHintRef.current,
+          tickerRef.current,
           { opacity: 0 },
-          { opacity: 0.18, duration: 0.5 },
+          { opacity: 1, duration: 0.6 },
           "-=0.2"
         );
     }, sectionRef);
@@ -67,14 +68,17 @@ export function HeroSection() {
           pin: true,
           scrub: 0.6,
           onLeaveBack: () => {
-            // Reset elements when scrolling back to top
-            gsap.set([labelRef.current, headlineRef.current, subheadlineRef.current, ctaRef.current], {
-              opacity: 1,
-              y: 0,
-              clearProps: "transform"
-            });
+            gsap.set(
+              [
+                labelRef.current,
+                headlineRef.current,
+                subheadlineRef.current,
+                ctaRef.current,
+              ],
+              { opacity: 1, y: 0, clearProps: "transform" }
+            );
             gsap.set(videoRef.current, { scale: 1, opacity: 1 });
-          }
+          },
         },
       });
 
@@ -93,12 +97,7 @@ export function HeroSection() {
         0.72
       );
 
-      scrollTl.fromTo(
-        labelRef.current,
-        { opacity: 1 },
-        { opacity: 0 },
-        0.75
-      );
+      scrollTl.fromTo(labelRef.current, { opacity: 1 }, { opacity: 0 }, 0.75);
 
       scrollTl.fromTo(
         videoRef.current,
@@ -111,8 +110,7 @@ export function HeroSection() {
     return () => ctx.revert();
   }, []);
 
-  // Split headline into words
-  const headlineText = "I build custom SaaS and powerful automations.";
+  const headlineText = "Grown by soil, sunrise, and sensors.";
   const words = headlineText.split(" ");
 
   return (
@@ -131,14 +129,11 @@ export function HeroSection() {
         className="absolute inset-0 w-full h-full object-cover z-0"
         poster="/hero-bg.jpg"
       >
-        <source
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
-          type="video/mp4"
-        />
+        <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/30 to-background/80 z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/30 to-background/85 z-[1]" />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center px-6 pt-32 pb-40 max-w-5xl mx-auto">
@@ -147,7 +142,7 @@ export function HeroSection() {
           ref={labelRef}
           className="text-mono text-xs tracking-[0.18em] text-white/60 uppercase mb-8"
         >
-          By Gurun // NYC 🗽 • KTM 🏔️
+          स्मार्ट खेती // Pharping, Kathmandu Valley 🇳🇵
         </p>
 
         {/* Headline */}
@@ -157,7 +152,11 @@ export function HeroSection() {
         >
           {words.map((word, i) => (
             <span key={i} className="word inline-block mr-[0.25em]">
-              {word}
+              {word === "sensors." ? (
+                <span className="text-accent">{word}</span>
+              ) : (
+                word
+              )}
             </span>
           ))}
         </h1>
@@ -167,23 +166,26 @@ export function HeroSection() {
           ref={subheadlineRef}
           className="text-white/70 text-base sm:text-lg max-w-2xl mt-8 leading-relaxed font-body"
         >
-          I help businesses in the US and Nepal turn complexity
-          into calm. No agency bloat—just one expert developer.
+          Fresh microgreens from a farm that runs on code — and the open
+          ESP32 tech that runs it. Engineered in New York, rooted in Nepal.
         </p>
 
         {/* CTA */}
-        <div ref={ctaRef} className="mt-12">
-          <GlassButton variant="large">Book a discovery call</GlassButton>
+        <div ref={ctaRef} className="mt-12 flex flex-col sm:flex-row gap-4">
+          <GlassButton variant="large">Order fresh greens</GlassButton>
+          <GlassButton variant="large" className="!bg-transparent">
+            Explore the farm tech
+          </GlassButton>
         </div>
       </div>
 
-      {/* Scroll Hint */}
-      <p
-        ref={scrollHintRef}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-mono text-xs text-white/20 uppercase tracking-widest z-10"
+      {/* Sensor Ticker — signature element */}
+      <div
+        ref={tickerRef}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
-        Scroll
-      </p>
+        <SensorTicker />
+      </div>
     </section>
   );
 }

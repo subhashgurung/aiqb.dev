@@ -29,7 +29,7 @@ export function CTASection() {
         },
       });
 
-      // ENTRANCE (0% - 30%)
+      // ENTRANCE
       scrollTl.fromTo(
         imageRef.current,
         { scale: 1.1, opacity: 0.7 },
@@ -65,9 +65,7 @@ export function CTASection() {
         0.25
       );
 
-      // SETTLE (30% - 70%) - hold
-
-      // EXIT (70% - 100%)
+      // EXIT
       scrollTl.fromTo(
         cardRef.current,
         { y: 0, opacity: 1 },
@@ -89,13 +87,13 @@ export function CTASection() {
   return (
     <section
       ref={sectionRef}
-      className="section-pinned relative z-[14] flex items-end justify-end bg-background"
+      className="section-pinned relative z-[15] flex items-end justify-end bg-background"
     >
       {/* Full-bleed Background Image */}
       <img
         ref={imageRef}
-        src="/cta-background.png"
-        alt="Futuristic workspace"
+        src="/cta-background.jpg"
+        alt="Terraced hills of Pharping at golden hour"
         className="absolute inset-0 w-full h-full object-cover"
       />
 
@@ -111,21 +109,19 @@ export function CTASection() {
           ref={headingRef}
           className="text-2xl sm:text-3xl lg:text-4xl text-white font-display leading-tight mb-4"
         >
-          See what's possible in one week.
+          Taste what the sensors grew.
         </h2>
 
         <p
           ref={bodyRef}
           className="text-sm lg:text-base text-white/70 font-body leading-relaxed mb-6"
         >
-          We'll map your highest-friction workflow and ship a working
-          prototype—fast.
+          Restaurants, hotels, and home cooks across the Kathmandu Valley —
+          place your first order and we'll harvest it the morning it ships.
         </p>
 
         <div ref={btnRef} className="flex flex-col gap-3">
-          <GlassButton variant="default">
-            Request a prototype plan
-          </GlassButton>
+          <GlassButton variant="default">Place your first order</GlassButton>
           <a
             href="mailto:hello@aiqb.dev"
             className="text-xs text-white/50 font-body hover:text-white/80 transition-colors"

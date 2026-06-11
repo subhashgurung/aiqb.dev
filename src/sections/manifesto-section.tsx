@@ -39,8 +39,6 @@ export function ManifestoSection() {
         0.05
       );
 
-      // SETTLE (30% - 70%) - hold
-
       // EXIT (70% - 100%)
       scrollTl.fromTo(
         headlineRef.current,
@@ -61,12 +59,12 @@ export function ManifestoSection() {
   }, []);
 
   const manifestoText =
-    "You don't need a massive agency. Engineered in New York, rooted in Nepal—I bridge two worlds to deliver world-class automations.";
+    "Thirty years in New York taught me systems. The hills of Pharping gave me soil. AI Kheti is what happens when both come home.";
 
   return (
     <section
       ref={sectionRef}
-      id="studio"
+      id="farm"
       className="section-pinned relative z-[11] flex items-center justify-center bg-background"
     >
       {/* Subtle vignette */}
@@ -74,10 +72,10 @@ export function ManifestoSection() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl mx-auto">
-        {/* Accent Line */}
+        {/* Accent Line — marigold, the Tihar thread */}
         <div
           ref={accentLineRef}
-          className="w-[72px] h-[2px] bg-accent mb-12 origin-center"
+          className="w-[72px] h-[2px] bg-marigold mb-12 origin-center"
           style={{ transform: "scaleX(0)" }}
         />
 

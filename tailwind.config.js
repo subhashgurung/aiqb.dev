@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Instrument Serif"', 'serif'],
+        display: ['Fraunces', 'serif'],
         body: ['Inter', 'sans-serif'],
         mono: ['"IBM Plex Mono"', 'monospace'],
       },
@@ -13,11 +13,17 @@ module.exports = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
+        background: {
+          DEFAULT: "hsl(var(--background))",
+          secondary: "hsl(var(--background-secondary))",
+        },
         foreground: "hsl(var(--foreground))",
         accent: {
           DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          foreground: "hsl(var(--background))",
+        },
+        marigold: {
+          DEFAULT: "hsl(var(--marigold))",
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -43,14 +49,14 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        jet: {
-          DEFAULT: "#0A0A0B",
-          deep: "#050505",
-          light: "#18181B",
+        loam: {
+          DEFAULT: "#0B120D",
+          deep: "#070C08",
+          light: "#142017",
         },
-        sand: {
-          DEFAULT: "#E5B05C",
-          dark: "#B48945",
+        leaf: {
+          DEFAULT: "#84B85C",
+          dark: "#5E8C40",
         },
       },
       borderRadius: {
@@ -96,7 +102,7 @@ module.exports = {
         'tight': '-0.02em',
       },
       lineHeight: {
-        'display': '0.95',
+        'display': '0.98',
         'relaxed': '1.55',
       },
     },

@@ -2,31 +2,31 @@ import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GlassCard } from "@/components/ui/glass-card";
-import { Bot, Workflow, MessageSquare } from "lucide-react";
+import { Sprout, Cpu, Activity } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const capabilities = [
   {
-    icon: Bot,
-    title: "AI Agents",
+    icon: Sprout,
+    title: "Fresh Microgreens",
     description:
-      "Autonomous agents that research, draft, schedule, and follow up—so your team stays in flow.",
-    image: "/capability-agent.png",
+      "Pea shoots, sunflower, radish, and premium herbs — harvested at dawn, delivered to Kathmandu kitchens the same day.",
+    image: "/capability-produce.jpg",
   },
   {
-    icon: Workflow,
-    title: "Workflow Automation",
+    icon: Cpu,
+    title: "ESP32 Farm Kits",
     description:
-      "Connect tools, eliminate handoffs, and enforce consistency across every repeat process.",
-    image: "/capability-workflow.png",
+      "Soil, climate, and light sensors pre-wired and pre-flashed. The same hardware running our farm, ready for yours.",
+    image: "/capability-tech.jpg",
   },
   {
-    icon: MessageSquare,
-    title: "Conversational Interfaces",
+    icon: Activity,
+    title: "AI Monitoring",
     description:
-      "Natural language experiences that understand context and act with precision.",
-    image: "/capability-interface.png",
+      "Every tray watched around the clock. Readings become decisions — when to water, when to harvest, when to act.",
+    image: "/capability-ai.jpg",
   },
 ];
 
@@ -58,7 +58,6 @@ export function CapabilitiesSection() {
         0
       );
 
-      // Card 1 - from left
       scrollTl.fromTo(
         cardsRef.current[0],
         { x: "-50vw", opacity: 0, rotateY: -18, scale: 0.96 },
@@ -66,7 +65,6 @@ export function CapabilitiesSection() {
         0.02
       );
 
-      // Card 2 - from bottom
       scrollTl.fromTo(
         cardsRef.current[1],
         { y: "60vh", opacity: 0, rotateX: 14, scale: 0.96 },
@@ -74,7 +72,6 @@ export function CapabilitiesSection() {
         0.04
       );
 
-      // Card 3 - from right
       scrollTl.fromTo(
         cardsRef.current[2],
         { x: "50vw", opacity: 0, rotateY: 18, scale: 0.96 },
@@ -82,7 +79,6 @@ export function CapabilitiesSection() {
         0.06
       );
 
-      // Card images
       cardsRef.current.forEach((card, i) => {
         const img = card?.querySelector("img");
         if (img) {
@@ -94,8 +90,6 @@ export function CapabilitiesSection() {
           );
         }
       });
-
-      // SETTLE (30% - 70%) - hold
 
       // EXIT (70% - 100%)
       scrollTl.fromTo(
@@ -119,12 +113,7 @@ export function CapabilitiesSection() {
         0.74
       );
 
-      scrollTl.fromTo(
-        labelRef.current,
-        { opacity: 1 },
-        { opacity: 0 },
-        0.8
-      );
+      scrollTl.fromTo(labelRef.current, { opacity: 1 }, { opacity: 0 }, 0.8);
     }, section);
 
     return () => ctx.revert();
@@ -133,15 +122,15 @@ export function CapabilitiesSection() {
   return (
     <section
       ref={sectionRef}
-      id="about"
+      id="tech"
       className="section-pinned relative z-[12] flex flex-col items-center justify-center bg-background"
     >
       {/* Section Label */}
       <p
         ref={labelRef}
-        className="absolute top-[10vh] left-1/2 -translate-x-1/2 text-mono text-xs tracking-[0.18em] text-white/60 uppercase"
+        className="absolute top-[10vh] left-1/2 -translate-x-1/2 text-mono text-xs tracking-[0.18em] text-white/60 uppercase whitespace-nowrap"
       >
-        What We Build
+        What We Grow & Build
       </p>
 
       {/* Cards Grid */}
@@ -149,24 +138,22 @@ export function CapabilitiesSection() {
         {capabilities.map((cap, i) => (
           <GlassCard
             key={cap.title}
-            ref={(el) => { cardsRef.current[i] = el; }}
+            ref={(el) => {
+              cardsRef.current[i] = el;
+            }}
             className="w-[280px] sm:w-[320px] lg:w-[360px] h-[480px] lg:h-[560px] flex flex-col p-6"
             style={{ perspective: "1000px" }}
           >
-            {/* Icon */}
             <cap.icon className="w-6 h-6 text-accent mb-4" strokeWidth={1.5} />
 
-            {/* Title */}
             <h3 className="text-2xl text-white font-display mb-3">
               {cap.title}
             </h3>
 
-            {/* Description */}
             <p className="text-sm text-white/60 font-body leading-relaxed mb-6">
               {cap.description}
             </p>
 
-            {/* Image */}
             <div className="flex-1 relative rounded-2xl overflow-hidden mt-auto">
               <img
                 src={cap.image}
